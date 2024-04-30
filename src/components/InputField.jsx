@@ -1,9 +1,9 @@
-const InputField = ({ label, placeholder }) => {
+const InputField = ({ label, placeholder, value, setBirthDate }) => {
   return (
     <div>
       <label
         htmlFor={label}
-        className="text-smokey-grey mb-1 block text-[10px] font-bold uppercase tracking-[0.2em]"
+        className="mb-1 block text-[10px] font-bold uppercase tracking-[0.2em] text-smokey-grey"
       >
         {label}
       </label>
@@ -12,15 +12,22 @@ const InputField = ({ label, placeholder }) => {
         placeholder={placeholder}
         name={label}
         id={label}
-        className="border-light-grey placeholder:text-smokey-grey text-off-black focus:border-purble w-28
-         rounded-md border px-3 py-2 text-xl
-        font-bold
-        outline-none
+        value={value === 0 ? "" : value}
+        onChange={(e) => {
+          setBirthDate((prevBirthDate) => {
+            return { ...prevBirthDate, [e.target.name]: e.target.value };
+          });
+          // console.log(e.target.name);
+        }}
+        className="w-28 rounded-md border border-light-grey px-3
+         py-2 text-xl font-bold text-off-black outline-none
         transition
         duration-200
         ease-in-out
-        placeholder:text-lg placeholder:font-bold
-        placeholder:opacity-80
+        placeholder:text-lg
+        placeholder:font-bold
+        placeholder:text-smokey-grey placeholder:opacity-80
+        focus:border-purble
         "
       ></input>
     </div>

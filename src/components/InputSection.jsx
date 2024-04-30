@@ -1,23 +1,70 @@
 import InputField from "./InputField";
+import { useState } from "react";
+const InputSection = ({ setResultDate }) => {
+  const [birthDate, setBirthDate] = useState({
+    day: 0,
+    month: 0,
+    year: 0,
+  });
 
-const InputSection = () => {
+  const { day, month, year } = birthDate;
+
+  const calculateAge = () => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentDay = currentDate.getDate();
+
+    let resultYears = currentYear - year;
+    let resultMonths = currentMonth - month;
+    if (resultMonths < 0) {
+      resultYears--;
+      resultMonths += 12;
+    }
+    let resultDays = currentDay - day;
+    if (resultDays < 0) {
+      resultMonths--;
+      resultDays += 30;
+    }
+    setResultDate({
+      days: resultDays,
+      months: resultMonths,
+      years: resultYears,
+    });
+  };
   return (
-    <div className="border-light-grey relative flex w-[500px] gap-4 border-b pb-7">
-      <InputField label={"day"} placeholder={"DD"} />
-      <InputField label={"month"} placeholder={"MM"} />
-      <InputField label={"year"} placeholder={"YYYY"} />
+    <div className="relative flex w-[500px] gap-4 border-b border-light-grey pb-7">
+      <InputField
+        label={"day"}
+        placeholder={"DD"}
+        value={day}
+        setBirthDate={setBirthDate}
+      />
+      <InputField
+        label={"month"}
+        placeholder={"MM"}
+        value={month}
+        setBirthDate={setBirthDate}
+      />
+      <InputField
+        label={"year"}
+        placeholder={"YYYY"}
+        value={year}
+        setBirthDate={setBirthDate}
+      />
       <button
         type="button"
-        className="bg-purble hover:bg-off-black hover: absolute
-        -bottom-8
-        right-0 flex
-      h-16  w-16 items-center justify-center
-      rounded-full
-        transition
+        className="hover: absolute -bottom-8 right-0
+        flex
+        h-16 w-16
+      items-center  justify-center rounded-full bg-purble
+      transition
+        duration-300
        
-        duration-300 ease-in-out"
+        ease-in-out hover:bg-off-black"
         onClick={() => {
-          console.log("button was clicked");
+          console.log(day, month, year);
+          calculateAge();
         }}
       >
         <svg
