@@ -8,11 +8,14 @@ const InputField = ({ label, placeholder, value, setBirthDate }) => {
         {label}
       </label>
       <input
-        type="text"
+        type="number"
         placeholder={placeholder}
         name={label}
         id={label}
         value={value === 0 ? "" : value}
+        required
+        // min={(label === "day" || "month") && 1}
+        // max={(label === "day" && 31) || (label === "month" && 12)}
         onChange={(e) => {
           setBirthDate((prevBirthDate) => {
             return { ...prevBirthDate, [e.target.name]: e.target.value };

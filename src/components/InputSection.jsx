@@ -8,13 +8,38 @@ const InputSection = ({ setResultDate }) => {
   });
 
   const { day, month, year } = birthDate;
+  const currentDate = new Date();
 
+  const isValidDate = () => {
+    return month >= 1 && month <= 12 && day >= 1 && day <= validateMonthDays();
+  };
+  const isLeapYear = () => {
+    const y = parseInt(year);
+    return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  };
+  const validateMonthDays = () => {
+    const m = parseInt(month);
+    switch (m) {
+      case 2:
+        return isLeapYear() ? 29 : 28;
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        return 30;
+      default:
+        return 31;
+    }
+  };
+  const isPastDate = () => {
+    // date string short format used > MM/DD/YYYY
+    const inputDate = new Date(`${month}/${day}/${year}`);
+    return inputDate < currentDate;
+  };
   const calculateAge = () => {
-    const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
     const currentDay = currentDate.getDate();
-
     let resultYears = currentYear - year;
     let resultMonths = currentMonth - month;
     if (resultMonths < 0) {
@@ -64,7 +89,17 @@ const InputSection = ({ setResultDate }) => {
         ease-in-out hover:bg-off-black"
         onClick={() => {
           console.log(day, month, year);
-          calculateAge();
+          isValidDate() && isPastDate()
+            ? calculateAge()
+            : setResultDate({
+                days: 0,
+                months: 0,
+                years: 0,
+              });
+          // console.log(isPastDate());
+          // console.log(validateMonth());
+          // console.log(typeof month);
+          // calculateAge();
         }}
       >
         <svg
