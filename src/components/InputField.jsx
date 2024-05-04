@@ -29,7 +29,7 @@ const InputField = ({
             return { ...prevBirthDate, [e.target.name]: e.target.value };
           });
         }}
-        className={`my-1 w-28 rounded-md
+        className={`my-1 w-20 rounded-md
         border px-3 py-2 text-xl
         font-bold
         text-off-black
@@ -41,31 +41,32 @@ const InputField = ({
         placeholder:text-smokey-grey
         placeholder:opacity-80
         focus:border-purble
+        sm:w-28
         ${isInvalid ? "border-light-red" : "border-light-grey"}
         `}
       />
       {(errorStatus.emptyFields && (
-        <p className="text-[0.625rem] italic text-light-red">
+        <p className="text-[0.5rem] italic text-light-red sm:text-[0.625rem]">
           This field is required
         </p>
       )) ||
         (errorStatus.notValidMonth && label === "month" && (
-          <p className="text-[0.625rem] italic text-light-red">
+          <p className="text-[0.5rem] italic text-light-red sm:text-[0.625rem]">
             Must be a valid {label}
           </p>
         )) ||
         (errorStatus.notValidDay && label === "day" && (
-          <p className="text-[0.625rem] italic text-light-red">
+          <p className="text-[0.5rem] italic text-light-red sm:text-[0.625rem]">
             Must be a valid {label}
           </p>
         )) ||
         (errorStatus.notPastYear && label === "year" && (
-          <p className="text-[0.625rem] italic text-light-red">
+          <p className="text-[0.5rem] italic text-light-red sm:text-[0.625rem]">
             Must be in the past
           </p>
         )) ||
         (errorStatus.notValidDate && label === "day" && (
-          <p className="text-[0.625rem] italic text-light-red">
+          <p className="text-[0.5rem] italic text-light-red sm:text-[0.625rem]">
             Must be a valid date
           </p>
         ))}

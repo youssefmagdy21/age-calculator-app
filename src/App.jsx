@@ -10,7 +10,7 @@ const App = () => {
   });
 
   return (
-    <div className="rounded-xl rounded-br-[100px] bg-white p-8">
+    <div className="flex-col rounded-xl rounded-br-[6.25rem] bg-white px-6 py-8 sm:px-8">
       <InputSection setResultDate={setResultDate} />
       <ResultSection resultDate={resultDate} />
     </div>

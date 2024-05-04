@@ -17,7 +17,6 @@ const InputSection = ({ setResultDate }) => {
   const currentDate = new Date();
 
   const isValidDate = () => {
-    // return month >= 1 && month <= 12 && day >= 1 && day <= getMonthDays();
     return isValidMonth() && isValidDay();
   };
   const isLeapYear = () => {
@@ -116,10 +115,10 @@ const InputSection = ({ setResultDate }) => {
   //   }
   // };
   const handleError = () => {
+    const isValidInputDay = day >= 1 && day <= 31;
     const m = isValidMonth();
     const p = isPastYear();
     const t = isValidDate();
-    const isValidInputDay = day >= 1 && day <= 31;
     setResultDate({
       days: 0,
       months: 0,
@@ -141,7 +140,7 @@ const InputSection = ({ setResultDate }) => {
   };
 
   return (
-    <div className="relative flex w-[500px] gap-4 border-b border-light-grey pb-7">
+    <div className="relative flex  justify-center gap-4 border-b border-light-grey pb-14 sm:w-[31.25rem] sm:justify-stretch sm:pb-7">
       <InputField
         label={"day"}
         placeholder={"DD"}
@@ -165,28 +164,32 @@ const InputSection = ({ setResultDate }) => {
       />
       <button
         type="button"
-        className="absolute -bottom-8 right-0
+        className="
+        absolute
+        -bottom-7
+        right-auto
         flex
-        h-16 w-16
-        items-center  justify-center rounded-full bg-purble
+        h-14
+        w-14
+        items-center
+        justify-center
+        rounded-full bg-purble
         transition
-        duration-300
-        ease-in-out hover:bg-off-black"
+        duration-300 ease-in-out hover:bg-off-black
+        sm:-bottom-8
+        sm:right-0
+        sm:h-16 sm:w-16"
         onClick={() => {
           console.log(day, month, year);
           isValidDate() && isPastDate() && !isEmptyFields()
             ? calculateAge()
             : handleError();
-          // console.log(isPastDate());
-          // console.log(validateMonth());
-          // console.log(typeof month);
-          // calculateAge();
         }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="34"
-          height="34"
+          width="28"
+          height="28"
           viewBox="0 0 46 46"
         >
           <g fill="none" stroke="#FFF" strokeWidth="2">
