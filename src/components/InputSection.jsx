@@ -172,13 +172,16 @@ const InputSection = ({ setResultDate }) => {
         h-14
         w-14
         items-center
-        justify-center
-        rounded-full bg-purble
-        transition
-        duration-300 ease-in-out hover:bg-off-black
+        justify-center rounded-full
+        bg-purble
+        transition duration-300
+        ease-in-out active:bg-off-black
         sm:-bottom-8
         sm:right-0
-        sm:h-16 sm:w-16"
+        sm:h-16 
+        sm:w-16
+        [@media(hover:hover){&:hover}]:bg-off-black
+        "
         onClick={() => {
           console.log(day, month, year);
           isValidDate() && isPastDate() && !isEmptyFields()
